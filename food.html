@@ -1,0 +1,80 @@
+<template>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Back</span>
+        </a>
+      </div>
+      <div class="title">Food</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">Food</div>
+      <div class="block block-strong">
+        <div class="searchbar-backdrop"></div>
+        <form class="searchbar">
+          <div class="searchbar-inner">
+            <div class="searchbar-input-wrap">
+              <input type="search" placeholder="Search" id="barcode">
+              <i class="searchbar-icon"></i>
+              <span class="input-clear-button"></span>
+            </div>
+            <span class="searchbar-disable-button">Cancel</span>
+            <button class="button col button-round" @click="checkAPI">Check</button>
+          </div>
+        </form>
+
+<div class="row center">
+
+  <h1><b>{{title}}</b></h1>
+   <p>{{description}}</p>
+
+</div>
+
+<div class="row center">
+  <div class="card-content card-content-padding"><img src={{photo_url}}></div>
+</div>
+</div>
+      </div>
+    </div>
+</template>
+
+<style>
+    .red-link {
+      color: red;
+    }
+</style>
+
+<script>
+  return {
+    data: function () {
+      return {
+        title: "",
+        photo: "",
+      }
+    },
+      methods: {
+        checkAPI: function(e) {
+          e.preventDefault();
+          console.log("cliked")
+          var self = this
+          var code= $$('#barcode').val()
+          var url= 'http://openfoodfacts.org/api/v0/produit/'+code+'.json'
+          console.log(code)
+          console.log(url)
+
+          app.request.json(url, function (data) {
+            self.$setState({
+            title: data.product.product_name,
+            description: data.product.generic_name,
+            photo_url: data.product.image_small_url
+            })
+        })
+      }
+    }
+  }
+
+</script>

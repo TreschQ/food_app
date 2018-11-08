@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exo 1</title>
+		<script src="js/framework7.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/framework7.min.css">
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/exo1.css">
+	</head>
+	<body>
+			<div class="title">Hello<span> HTML World</span></div>
+			<div class="title">Hello<span id="toggleme"> HTML World</span></div>
+			<div class="title2"> Bonjour ! </div>
+			<div class="majuscule">bonjour</div>
+
+			<button id="bonjour"> Hide </button>
+			<button id="change"> Change HTML</button>
+			<button id='stop'>Stop</button>
+
+
+			<script>
+				$("button#bonjour").on("click",function() {
+						console.log("Click !")
+						$("span#toggleme").toggle()
+				})
+				$("button#change").on("click",function() {
+						console.log("Click !")
+						$("span#toggleme").html("JS")
+				})
+
+				timer=setInterval(function() {
+					$(".title").toggleClass("active")
+				},1000)
+
+				$("#stop").on("click", function() {
+					clearInterval(timer)
+				})
+			</script>
+
+	</body>
+</html>
